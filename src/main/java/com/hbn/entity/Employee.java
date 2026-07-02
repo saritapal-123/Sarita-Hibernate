@@ -1,10 +1,16 @@
 package com.hbn.entity;
+
+
 import org.hibernate.annotations.NamedQuery;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.Transient;
 	
 @Entity
 public class Employee {
@@ -13,7 +19,10 @@ public class Employee {
 	private int id;
 	private String name,gender;
 	private int salary;
-	@OneToOne
+	@Transient
+	private String country;
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name ="add_id")
 	private Address address;
 	public Employee() {
 		super();
@@ -60,8 +69,7 @@ public class Employee {
 	}
 	@Override
 	public String toString() {
-		return "Employee [id=" + id + ", name=" + name + ", gender=" + gender + ", salary=" + salary + ", address="
-				+ address + "]";
+		return "Employee [id=" + id + ", name=" + name + ", gender=" + gender + ", salary=" + salary + "]";
 	}
 	
 	

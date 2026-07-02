@@ -3,22 +3,33 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 @Entity
 public class Address {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String city, state;
-	private int salary;
+	@OneToOne(mappedBy ="address")
+	private Employee employee;
+	
 	public Address() {
 		super();	
 	}
-	public Address(int id, String city, String state, int salary) {
+	public Address(int id, String city, String state,  Employee employee) {
 		super();
 		this.id = id;
 		this.city = city;
 		this.state = state;
-		this.salary = salary;
+		
+		this.employee = employee;
+	}
+	
+	public Employee getEmployee() {
+		return employee;
+	}
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
 	}
 	public int getId() {
 		return id;
@@ -38,16 +49,13 @@ public class Address {
 	public void setState(String state) {
 		this.state = state;
 	}
-	public int getSalary() {
-		return salary;
-	}
-	public void setSalary(int salary) {
-		this.salary = salary;
-	}
 	@Override
 	public String toString() {
-		return "Address [id=" + id + ", city=" + city + ", state=" + state + ", salary=" + salary + "]";
+		return "Address [id=" + id + ", city=" + city + ", state=" + state + " ]";
 	}
+	
+	
+	
 	
 	
 	}
