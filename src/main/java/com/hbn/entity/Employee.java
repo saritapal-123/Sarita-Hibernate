@@ -2,16 +2,16 @@ package com.hbn.entity;
 
 
 import org.hibernate.annotations.NamedQuery;
-
+import java.util.List;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Transient;
-	
 @Entity
 public class Employee {
 	@Id
@@ -21,20 +21,16 @@ public class Employee {
 	private int salary;
 	@Transient
 	private String country;
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name ="add_id")
-	private Address address;
+	@OneToMany(cascade = CascadeType.ALL)
+	private List <Address> address;
 	public Employee() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
-	public Employee( String name, String gender, int salary,Address address) {
+	public Employee( String name, String gender, int salary) {
 		super();
-		
 		this.name = name;
 		this.gender = gender;
 		this.salary = salary;
-		this.address = address;
 	}
 	public int getId() {
 		return id;
@@ -61,16 +57,25 @@ public class Employee {
 		this.salary = salary;
 	}
 	
-	public Address getAddress() {
+	
+	public String getCountry() {
+		return country;
+	}
+	public void setCountry(String country) {
+		this.country = country;
+	}
+	public List<Address> getAddress() {
 		return address;
 	}
-	public void setAddress(Address address) {
+	public void setAddress(List<Address> address) {
 		this.address = address;
 	}
 	@Override
 	public String toString() {
-		return "Employee [id=" + id + ", name=" + name + ", gender=" + gender + ", salary=" + salary + "]";
+		return "Employee [id=" + id + ", name=" + name + ", gender=" + gender + ", salary=" + salary + ", country="
+				+ country + ", address=" + address + "]";
 	}
+	
 	
 	
 
