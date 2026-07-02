@@ -9,11 +9,14 @@ import com.hibernate.config.Hibernateconfig;
 public class Main {
 
 	public static void main(String[] args) {
-		Employee e =new Employee("vikas","male",330000);
-
+		Employee e1 =new Employee("vikas","male",330000);
+		
 		Session session = Hibernateconfig.getSessionFactory().openSession();
 		Transaction tx = session.beginTransaction();
-		session.persist(e);
+		session.persist(e1);
+		
+
+
 		tx.commit();
 	}
 
