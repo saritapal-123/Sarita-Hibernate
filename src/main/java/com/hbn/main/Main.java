@@ -7,27 +7,29 @@ import org.hibernate.Transaction;
 import org.hibernate.query.MutationQuery;
 import org.hibernate.query.Query;
 
+import com.hbn.entity.Address;
 import com.hbn.entity.Employee;
 import com.hibernate.config.Hibernateconfig;
 
 public class Main {
 
 	public static void main(String[] args) {
+		Address add1 =new Address();
+		add1.setState("GZB");
+		add1.setCity("up");
+		
 	
 		Employee e1 =new Employee();
+		e1.setName("ashis");
+		e1.setGender("male");
+		e1.setSalary(550000);
+		e1.setAddress(add1);
+		
 		
 		Session session = Hibernateconfig.getSessionFactory().openSession();
 		Transaction tx = session.beginTransaction();
-		Query query = session.createNamedQuery("findByid",Employee.class);
-		query.setParameter("id",2);
-		List list = query.getResultList();
-		System.out.println(list);
-		System.out.println("-------------------------------------------");
-		Query query2 = session.createNamedQuery("findByGender",Employee.class);
-		query2.setParameter("gender","female");
-		List list2 = query2.getResultList();
-		System.out.println(list2);
-	
+		session.persist(add1);
+		session.persist(e1);
 		
 		
 	
