@@ -18,34 +18,16 @@ public class Main {
 		
 		Session session = Hibernateconfig.getSessionFactory().openSession();
 		Transaction tx = session.beginTransaction();
-		// to get all the records from DB
-	//	Query query = session.createQuery("from Employee",Employee.class);
-	//	List list = query.getResultList();
-	//	System.out.println(list);
-		
-	//	to get records with pagination from DB
-	//	Query query = session.createQuery("from Employee",Employee.class);
-	//	query.setFirstResult(2);
-	//	query.setMaxResults(5);
-	//	List list = query.getResultList();
-	//	System.out.println(list);
-		
-		// to update the records DB
-	//	MutationQuery query = session.createMutationQuery("update Employee set name = :n where id = :i");
-	//	query.setParameter("n", "param");
-	//	query.setParameter("i", 3);
-	//	query.executeUpdate();
-		
-		// to delete all the records from DB
-	//	MutationQuery query = session.createMutationQuery("delete from Employee  where id = :i");
-	//		query.setParameter("i", 7);
-	//		query.executeUpdate();
-			
-			//aggrigation function
-			Query query1 = session.createQuery("select max(name)from Employee");
-			List list = query1.getResultList();
-			System.out.println(list);
-		
+		Query query = session.createNamedQuery("findByid",Employee.class);
+		query.setParameter("id",2);
+		List list = query.getResultList();
+		System.out.println(list);
+		System.out.println("-------------------------------------------");
+		Query query2 = session.createNamedQuery("findByGender",Employee.class);
+		query2.setParameter("gender","female");
+		List list2 = query2.getResultList();
+		System.out.println(list2);
+	
 		
 		
 	
