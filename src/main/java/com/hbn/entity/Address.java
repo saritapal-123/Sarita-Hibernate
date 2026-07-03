@@ -1,9 +1,19 @@
 package com.hbn.entity;
 import jakarta.persistence.Entity;
+
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString(exclude = "employee")
 @Entity
 public class Address {
 	@Id
@@ -11,43 +21,8 @@ public class Address {
 	private int id;
 	private String city, state;
 	
-	
-	public Address() {
-		super();	
-	}
-	public Address(int id, String city, String state) {
-		super();
-		this.id = id;
-		this.city = city;
-		this.state = state;
-		
-		
-	}
-	
-	
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
-	public String getCity() {
-		return city;
-	}
-	public void setCity(String city) {
-		this.city = city;
-	}
-	public String getState() {
-		return state;
-	}
-	public void setState(String state) {
-		this.state = state;
-	}
-	@Override
-	public String toString() {
-		return "Address [id=" + id + ", city=" + city + ", state=" + state + " ]";
-	}
-	
+	@ManyToOne
+	private Employee employee;
 	
 	
 	
